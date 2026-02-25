@@ -17,21 +17,3 @@ export const CHAPTERS: Chapter[] = [
   { id: 14, name: "Public Goods and Tax Policy", shortName: "Public Goods" },
   { id: 15, name: "International Trade and Trade Policy", shortName: "Trade Policy" },
 ];
-
-export const CHAPTER_COLORS: Record<number, string> = {
-  1: "bg-blue-100 text-blue-800 border-blue-200",
-  2: "bg-emerald-100 text-emerald-800 border-emerald-200",
-  3: "bg-amber-100 text-amber-800 border-amber-200",
-  4: "bg-rose-100 text-rose-800 border-rose-200",
-  5: "bg-violet-100 text-violet-800 border-violet-200",
-  6: "bg-cyan-100 text-cyan-800 border-cyan-200",
-  7: "bg-orange-100 text-orange-800 border-orange-200",
-  8: "bg-red-100 text-red-800 border-red-200",
-  9: "bg-indigo-100 text-indigo-800 border-indigo-200",
-  10: "bg-pink-100 text-pink-800 border-pink-200",
-  11: "bg-green-100 text-green-800 border-green-200",
-  12: "bg-purple-100 text-purple-800 border-purple-200",
-  13: "bg-yellow-100 text-yellow-800 border-yellow-200",
-  14: "bg-teal-100 text-teal-800 border-teal-200",
-  15: "bg-sky-100 text-sky-800 border-sky-200",
-};

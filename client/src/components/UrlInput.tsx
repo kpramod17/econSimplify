@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 interface UrlInputProps {
   onSubmit: (url: string) => void;
@@ -17,41 +17,42 @@ export default function UrlInput({ onSubmit, error }: UrlInputProps) {
   }
 
   return (
-    <div className="flex flex-col items-center py-20">
-      <h2 className="mb-2 text-2xl font-bold text-gray-900">
-        Simplify Economics News
+    <div className="flex flex-col items-center py-28 animate-fade-in-up">
+      {/* Hero heading */}
+      <h2 className="mb-3 text-center font-serif text-5xl leading-[1.15] text-[#e8e8e3] sm:text-6xl">
+        understand<br />
+        <span className="italic">economics</span>
       </h2>
-      <p className="mb-8 text-gray-500">
-        Paste an economics article URL to get a simple explanation
+      <p className="mb-12 max-w-sm text-center text-sm leading-relaxed text-[#555]">
+        Paste any article. Get a clear, jargon-free explanation{" "}
+        with deep dives into key concepts.
       </p>
 
-      <form onSubmit={handleSubmit} className="w-full max-w-xl">
-        <div className="flex gap-2">
-          <div className="relative flex-1">
-            <Link className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
-            <input
-              type="url"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              placeholder="Paste a news article URL to simplify it"
-              className="w-full rounded-lg border border-gray-300 py-2.5 pl-10 pr-4 text-sm outline-none transition-colors focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-              required
-            />
-          </div>
+      {/* Input */}
+      <form onSubmit={handleSubmit} className="w-full max-w-md">
+        <div className="flex items-center gap-3 border-b border-white/10 pb-3">
+          <input
+            type="url"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="Paste an article URL"
+            className="flex-1 bg-transparent text-sm text-[#e8e8e3] placeholder-[#444] outline-none"
+            required
+          />
           <button
             type="submit"
-            className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+            className="flex items-center gap-1.5 rounded-full bg-[#e8e8e3] px-4 py-2 text-xs font-medium text-[#0a0a0a] transition-opacity hover:opacity-80"
           >
             Simplify
-            <ArrowRight className="h-4 w-4" />
+            <ArrowRight className="h-3 w-3" />
           </button>
         </div>
       </form>
 
       {error && (
-        <div className="mt-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+        <p className="mt-6 text-xs text-red-400/80">
           {error}
-        </div>
+        </p>
       )}
     </div>
   );

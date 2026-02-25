@@ -4,34 +4,41 @@ interface SimplifiedContentProps {
 }
 
 export default function SimplifiedContent({ content, onTermClick }: SimplifiedContentProps) {
-  // Split content on {{term}} markers and render highlighted terms
-  const parts = content.split(/(\{\{[^}]+\}\})/g);
+  const paragraphs = content.split(/\n\n+/);
 
   return (
-    <div className="text-sm leading-relaxed text-gray-700">
-      {parts.map((part, i) => {
-        const match = part.match(/^\{\{(.+)\}\}$/);
-        if (match) {
-          const term = match[1];
-          return (
-            <span
-              key={i}
-              className="highlight-term"
-              onClick={() => onTermClick(term)}
-            >
-              {term}
-            </span>
-          );
-        }
-        // Render newlines as paragraphs
-        const paragraphs = part.split(/\n\n+/);
-        return paragraphs.map((p, j) => (
-          <span key={`${i}-${j}`}>
-            {j > 0 && <br className="mb-3 block content-['']" />}
-            {j > 0 && <br />}
-            {p}
-          </span>
-        ));
+    <div className="space-y-6">
+      {paragraphs.map((paragraph, pIndex) => {
+        const parts = paragraph.split(/(\{\{[^}]+\}\})/g);
+
+        return (
+          <p
+            key={pIndex}
+            className="text-sm leading-[1.85] text-[#999]"
+          >
+            {parts.map((part, i) => {
+              const match = part.match(/^\{\{(.+)\}\}$/);
+              if (match) {
+                const term = match[1];
+                return (
+                  <span
+                    key={`${pIndex}-${i}`}
+                    className="highlight-term"
+                    onClick={() => onTermClick(term)}
+                    role="button"
+                    tabIndex={0}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") onTermClick(term);
+                    }}
+                  >
+                    {term}
+                  </span>
+                );
+              }
+              return <span key={`${pIndex}-${i}`}>{part}</span>;
+            })}
+          </p>
+        );
       })}
     </div>
   );

@@ -12,31 +12,33 @@ export default function ArticleView({ result, onTermClick }: ArticleViewProps) {
   const [view, setView] = useState<"simplified" | "original">("simplified");
 
   return (
-    <div>
+    <div className="animate-fade-in-up">
       {/* Title */}
-      <h2 className="mb-4 text-2xl font-bold text-gray-900">{result.title}</h2>
+      <h2 className="mb-5 font-serif text-3xl leading-snug text-[#e8e8e3]">
+        {result.title}
+      </h2>
 
       {/* Topic Tags */}
       <TopicTags tags={result.tags} explanation={result.tagExplanation} />
 
       {/* Toggle */}
-      <div className="mb-6 mt-4 flex gap-1 rounded-lg bg-gray-100 p-1 w-fit">
+      <div className="mb-8 mt-6 flex gap-6 border-b border-white/[0.06]">
         <button
           onClick={() => setView("simplified")}
-          className={`rounded-md px-4 py-1.5 text-sm font-medium transition-colors ${
+          className={`pb-3 text-xs font-medium tracking-wide transition-colors ${
             view === "simplified"
-              ? "bg-white text-gray-900 shadow-sm"
-              : "text-gray-500 hover:text-gray-700"
+              ? "tab-active text-[#e8e8e3]"
+              : "text-[#555] hover:text-[#888]"
           }`}
         >
           Simplified
         </button>
         <button
           onClick={() => setView("original")}
-          className={`rounded-md px-4 py-1.5 text-sm font-medium transition-colors ${
+          className={`pb-3 text-xs font-medium tracking-wide transition-colors ${
             view === "original"
-              ? "bg-white text-gray-900 shadow-sm"
-              : "text-gray-500 hover:text-gray-700"
+              ? "tab-active text-[#e8e8e3]"
+              : "text-[#555] hover:text-[#888]"
           }`}
         >
           Original
@@ -44,18 +46,21 @@ export default function ArticleView({ result, onTermClick }: ArticleViewProps) {
       </div>
 
       {/* Content */}
-      <div className="rounded-lg border border-gray-200 bg-white p-6">
-        {view === "simplified" ? (
+      {view === "simplified" ? (
+        <div>
+          <p className="mb-5 text-[11px] uppercase tracking-widest text-[#444]">
+            Click underlined terms for deep dives
+          </p>
           <SimplifiedContent
             content={result.simplifiedContent}
             onTermClick={onTermClick}
           />
-        ) : (
-          <div className="whitespace-pre-line text-sm leading-relaxed text-gray-700">
-            {result.originalContent}
-          </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div className="whitespace-pre-line text-sm leading-[1.8] text-[#888]">
+          {result.originalContent}
+        </div>
+      )}
     </div>
   );
 }

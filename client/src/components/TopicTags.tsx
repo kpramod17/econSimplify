@@ -1,4 +1,4 @@
-import { CHAPTERS, CHAPTER_COLORS } from "../lib/constants";
+import { CHAPTERS } from "../lib/constants";
 
 interface TopicTagsProps {
   tags: number[];
@@ -14,19 +14,18 @@ export default function TopicTags({ tags, explanation }: TopicTagsProps) {
         {tags.map((tagId) => {
           const chapter = CHAPTERS.find((c) => c.id === tagId);
           if (!chapter) return null;
-          const colors = CHAPTER_COLORS[tagId] || "bg-gray-100 text-gray-800 border-gray-200";
           return (
             <span
               key={tagId}
-              className={`inline-flex items-center rounded-full border px-3 py-1 text-xs font-medium ${colors}`}
+              className="rounded-full border border-white/[0.08] px-3 py-1 text-[11px] text-[#666]"
             >
-              Ch{chapter.id}: {chapter.shortName}
+              {chapter.shortName}
             </span>
           );
         })}
       </div>
       {explanation && (
-        <p className="mt-2 text-xs text-gray-500">{explanation}</p>
+        <p className="mt-3 text-xs leading-relaxed text-[#444]">{explanation}</p>
       )}
     </div>
   );
