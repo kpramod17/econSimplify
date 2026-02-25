@@ -12,7 +12,12 @@ if (process.env.NODE_ENV !== "production") {
   // Development: attach Vite dev server as middleware
   const { createServer } = await import("vite");
   const vite = await createServer({
-    server: { middlewareMode: true },
+    server: {
+      middlewareMode: true,
+      watch: {
+        ignored: ["**/server/**", "**/shared/**", "**/.env"],
+      },
+    },
     root: "client",
     appType: "spa",
   });
